@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,6 +34,15 @@
     --ring: 201 94% 41%;
 
     --radius: 0.5rem;
+    
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 20% 20%;
+    --sidebar-primary: 201 94% 41%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 199 89% 92%;
+    --sidebar-accent-foreground: 201 94% 25%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 201 94% 41%;
   }
 
   .dark {
@@ -63,6 +73,15 @@
     --border: 202 40% 25%;
     --input: 202 40% 25%;
     --ring: 199 89% 48%;
+    
+    --sidebar-background: 202 40% 15%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 202 50% 10%;
+    --sidebar-accent: 202 40% 25%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 202 40% 25%;
+    --sidebar-ring: 199 89% 48%;
   }
 }
 
@@ -73,6 +92,16 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Improved focus styles */
+  :focus {
+    @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-background;
+  }
+  
+  /* Transition for theme switch */
+  body, a, button, div {
+    @apply transition-colors duration-200;
   }
 }
 
@@ -99,3 +128,50 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 hover:bg-muted-foreground/50;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Button hover animations */
+.btn-hover-scale {
+  @apply transition-all duration-300 hover:scale-105 active:scale-95;
+}
+
