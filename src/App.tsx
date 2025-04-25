@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
-import Database from "./pages/Database";
+import DatabasePage from "./pages/Database";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,7 +55,7 @@ const AppRoutes = () => {
       {/* Protected routes */}
       <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
-      <Route path="/database" element={<ProtectedRoute><Database /></ProtectedRoute>} />
+      <Route path="/database" element={<ProtectedRoute><DatabasePage /></ProtectedRoute>} />
       
       {/* Redirect root to dashboard or login */}
       <Route path="/" element={<Navigate to="/dashboard" replace />} />

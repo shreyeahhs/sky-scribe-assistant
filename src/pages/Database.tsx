@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -7,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import QueryInput from '@/components/QueryInput';
 import SqlDisplay from '@/components/SqlDisplay';
-import { Database, Plus, Upload, RefreshCw } from 'lucide-react';
+import { Database as DatabaseIcon, Plus, Upload, RefreshCw } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 
@@ -20,7 +19,7 @@ const mockTables = [
   { name: 'passengers', rowCount: 203456, lastUpdate: '2025-04-22' }
 ];
 
-const Database = () => {
+const DatabasePage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [generatedQuery, setGeneratedQuery] = useState('');
   const { toast } = useToast();
@@ -143,7 +142,7 @@ WHERE departure_airport = 'OLD' AND arrival_airport = 'XXX';`;
                   <Card key={table.name} className="p-4 hover:bg-gray-50 transition-colors">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
-                        <Database className="h-5 w-5 text-primary mr-2" />
+                        <DatabaseIcon className="h-5 w-5 text-primary mr-2" />
                         <div>
                           <h3 className="font-medium">{table.name}</h3>
                           <p className="text-xs text-muted-foreground">
@@ -166,4 +165,4 @@ WHERE departure_airport = 'OLD' AND arrival_airport = 'XXX';`;
   );
 };
 
-export default Database;
+export default DatabasePage;
