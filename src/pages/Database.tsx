@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -6,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import QueryInput from '@/components/QueryInput';
 import SqlDisplay from '@/components/SqlDisplay';
-import { Database as DatabaseIcon, Plus, Upload, RefreshCw } from 'lucide-react';
+import { DatabaseIcon, Plus, Upload, RefreshCw } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 
@@ -80,24 +81,24 @@ WHERE departure_airport = 'OLD' AND arrival_airport = 'XXX';`;
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Database Management</h1>
-          <p className="text-muted-foreground mt-2">
+      <div className="max-w-6xl mx-auto space-y-8">
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold tracking-tight">Database Management</h1>
+          <p className="text-muted-foreground text-lg">
             Manage airport data using natural language commands
           </p>
         </div>
         
-        <Tabs defaultValue="manage">
-          <TabsList className="grid grid-cols-2 w-[400px]">
-            <TabsTrigger value="manage">Manage Data</TabsTrigger>
-            <TabsTrigger value="tables">Database Tables</TabsTrigger>
+        <Tabs defaultValue="manage" className="space-y-6">
+          <TabsList className="bg-background w-full max-w-md grid grid-cols-2 p-1">
+            <TabsTrigger value="manage" className="text-base">Manage Data</TabsTrigger>
+            <TabsTrigger value="tables" className="text-base">Database Tables</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="manage" className="mt-4">
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Natural Language Database Management</h2>
-              <p className="text-muted-foreground mb-6">
+          <TabsContent value="manage">
+            <Card className="p-8 shadow-lg border-2">
+              <h2 className="text-2xl font-semibold mb-4">Natural Language Database Management</h2>
+              <p className="text-muted-foreground mb-8 text-base">
                 Tell the assistant what you want to do in plain English, and it will generate the SQL for you.
               </p>
               
@@ -108,11 +109,11 @@ WHERE departure_airport = 'OLD' AND arrival_airport = 'XXX';`;
               />
               
               {generatedQuery && (
-                <div className="mt-4">
+                <div className="mt-6 space-y-4">
                   <SqlDisplay sql={generatedQuery} />
                   
-                  <div className="flex justify-end mt-2">
-                    <Button onClick={handleExecuteQuery}>
+                  <div className="flex justify-end">
+                    <Button onClick={handleExecuteQuery} size="lg" className="px-8">
                       Execute Query
                     </Button>
                   </div>
@@ -121,36 +122,45 @@ WHERE departure_airport = 'OLD' AND arrival_airport = 'XXX';`;
             </Card>
           </TabsContent>
           
-          <TabsContent value="tables" className="mt-4">
-            <Card className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold">Database Tables</h2>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    <Upload className="h-4 w-4 mr-2" />
-                    Import
+          <TabsContent value="tables">
+            <Card className="p-8 shadow-lg border-2">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl font-semibold">Database Tables</h2>
+                <div className="flex gap-3">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Upload className="h-4 w-4" />
+                    Import Data
                   </Button>
-                  <Button size="sm">
-                    <Plus className="h-4 w-4 mr-2" />
+                  <Button className="flex items-center gap-2">
+                    <Plus className="h-4 w-4" />
                     New Table
                   </Button>
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {mockTables.map((table) => (
-                  <Card key={table.name} className="p-4 hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center">
-                        <DatabaseIcon className="h-5 w-5 text-primary mr-2" />
+                  <Card 
+                    key={table.name} 
+                    className="p-6 hover:bg-accent/5 transition-colors border-2 relative group"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex gap-4">
+                        <div className="p-2 rounded-lg bg-primary/10">
+                          <DatabaseIcon className="h-5 w-5 text-primary" />
+                        </div>
                         <div>
-                          <h3 className="font-medium">{table.name}</h3>
-                          <p className="text-xs text-muted-foreground">
+                          <h3 className="font-medium text-lg mb-1">{table.name}</h3>
+                          <p className="text-sm text-muted-foreground">
                             {table.rowCount.toLocaleString()} rows • Updated {table.lastUpdate}
                           </p>
                         </div>
                       </div>
-                      <Button variant="ghost" size="icon">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
                         <RefreshCw className="h-4 w-4" />
                       </Button>
                     </div>
