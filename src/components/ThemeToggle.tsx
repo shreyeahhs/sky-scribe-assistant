@@ -4,7 +4,11 @@ import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-const ThemeToggle = () => {
+interface ThemeToggleProps {
+  isSidebarCollapsed?: boolean;
+}
+
+const ThemeToggle = ({ isSidebarCollapsed }: ThemeToggleProps) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   
   useEffect(() => {
@@ -44,7 +48,7 @@ const ThemeToggle = () => {
             variant="ghost" 
             size="icon" 
             onClick={toggleTheme}
-            className="rounded-full w-9 h-9 transition-all"
+            className={`rounded-full w-9 h-9 transition-all ${isSidebarCollapsed ? 'mx-auto' : ''}`}
             aria-label="Toggle theme"
           >
             {theme === 'light' ? (

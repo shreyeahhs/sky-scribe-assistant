@@ -36,33 +36,33 @@
   }
 
   .dark {
-    --background: 202 50% 12%;
+    --background: 220 40% 10%;
     --foreground: 210 40% 98%;
     
-    --card: 202 40% 15%;
+    --card: 220 35% 15%;
     --card-foreground: 210 40% 98%;
     
-    --popover: 202 40% 15%;
+    --popover: 220 35% 15%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 199 89% 48%;
-    --primary-foreground: 202 50% 10%;
+    --primary: 199 89% 60%;
+    --primary-foreground: 220 40% 10%;
     
-    --secondary: 201 94% 41%;
+    --secondary: 201 94% 55%;
     --secondary-foreground: 210 40% 98%;
     
-    --muted: 202 40% 20%;
+    --muted: 220 35% 20%;
     --muted-foreground: 210 40% 80%;
     
-    --accent: 202 40% 25%;
+    --accent: 220 35% 25%;
     --accent-foreground: 210 40% 98%;
     
-    --destructive: 0 62.8% 50.6%;
+    --destructive: 0 62.8% 60%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 202 40% 25%;
-    --input: 202 40% 25%;
-    --ring: 199 89% 48%;
+    --border: 220 35% 25%;
+    --input: 220 35% 25%;
+    --ring: 199 89% 60%;
   }
 }
 
@@ -75,12 +75,10 @@
     @apply bg-background text-foreground;
   }
   
-  /* Improved focus styles */
   :focus-visible {
     @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
   
-  /* Smooth transitions for theme switching */
   html.dark {
     color-scheme: dark;
   }
@@ -136,7 +134,6 @@
   animation: bounce-in 0.5s ease-out;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -154,12 +151,10 @@
   @apply bg-muted-foreground/30 hover:bg-muted-foreground/50;
 }
 
-/* Card hover effects */
 .card-hover {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
 }
 
-/* Button hover animations */
 .btn-hover-scale {
   @apply transition-all duration-300 hover:scale-105 active:scale-95;
 }

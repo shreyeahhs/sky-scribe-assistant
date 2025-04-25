@@ -145,18 +145,19 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 p-4">
+          {/* Fixed the footer layout to prevent button overlap */}
           <div className={cn(
             "flex",
-            isSidebarCollapsed ? "justify-center" : "justify-between items-center"
+            isSidebarCollapsed ? "justify-center flex-col space-y-3" : "justify-between items-center"
           )}>
-            {!isSidebarCollapsed && <ThemeToggle />}
+            <ThemeToggle isSidebarCollapsed={isSidebarCollapsed} />
             
             <Button
               variant="outline"
               size={isSidebarCollapsed ? "icon" : "default"}
               className={cn(
                 "hover:bg-accent/50 hover:text-foreground border-muted",
-                isSidebarCollapsed ? "w-10 h-10 p-0" : "w-full"
+                isSidebarCollapsed ? "w-10 h-10 p-0" : ""
               )}
               onClick={handleLogout}
             >

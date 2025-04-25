@@ -15,7 +15,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children, title }) => {
           <div className="bg-primary/90 p-4 rounded-full mb-4 shadow-lg hover:scale-105 transition-transform">
             <Plane className="text-primary-foreground h-8 w-8" />
           </div>
-          <h1 className="text-3xl font-bold text-center text-primary">{title}</h1>
+          <h1 className="text-3xl font-bold text-center text-primary dark:text-primary">{title}</h1>
           <div className="mt-2 h-1 w-20 bg-primary/50 rounded"></div>
         </div>
         
