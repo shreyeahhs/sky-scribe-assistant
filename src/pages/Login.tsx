@@ -50,13 +50,17 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="w-full"
           />
         </div>
 
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <Label htmlFor="password">Password</Label>
-            <Link to="/forgot-password" className="text-sm text-primary hover:underline">
+            <Link 
+              to="/forgot-password" 
+              className="text-sm text-primary hover:text-primary/80 transition-colors"
+            >
               Forgot password?
             </Link>
           </div>
@@ -67,12 +71,13 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="w-full"
           />
         </div>
 
         <Button 
           type="submit" 
-          className="w-full" 
+          className="w-full font-medium"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Signing in...' : 'Sign In'}
@@ -80,13 +85,16 @@ const Login = () => {
 
         <div className="text-center text-sm text-muted-foreground">
           Don't have an account?{' '}
-          <Link to="/register" className="text-primary font-medium hover:underline">
+          <Link 
+            to="/register" 
+            className="text-primary font-medium hover:text-primary/80 transition-colors"
+          >
             Sign up
           </Link>
         </div>
         
-        <div className="mt-4 p-3 bg-muted/50 rounded-md">
-          <p className="text-sm text-muted-foreground">Demo credentials:</p>
+        <div className="mt-4 p-4 bg-muted/50 rounded-lg border border-border/50">
+          <p className="text-sm font-medium text-muted-foreground mb-2">Demo credentials:</p>
           <p className="text-sm"><strong>Admin:</strong> admin@example.com / admin</p>
           <p className="text-sm"><strong>User:</strong> user@example.com / user</p>
         </div>
