@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -34,49 +33,70 @@ const DatabasePage = () => {
   const handleNlpQuery = async (query: string) => {
     setIsProcessing(true);
     
-    // Simulate processing delay
-    setTimeout(() => {
-      // Generate a mock SQL based on the natural language query
-      let sql = '';
-      
-      if (query.toLowerCase().includes('add') || query.toLowerCase().includes('new airport')) {
-        const airportName = query.match(/add ([\w\s]+) airport/) 
-          || query.match(/new airport ([\w\s]+)/) 
-          || ['', 'New Airport'];
-        
-        sql = `INSERT INTO airports (code, name, city, country, timezone)
-VALUES ('XYZ', '${airportName[1].trim()}', 'New City', 'Country', 'GMT+0');`;
-      } else if (query.toLowerCase().includes('update')) {
-        sql = `UPDATE airports
-SET timezone = 'GMT+1'
-WHERE code = 'JFK';`;
-      } else if (query.toLowerCase().includes('delete')) {
-        sql = `DELETE FROM routes
-WHERE departure_airport = 'OLD' AND arrival_airport = 'XXX';`;
-      } else {
-        sql = `SELECT * FROM airports WHERE country = 'USA';`;
+    try {
+      const response = await fetch('/api/v1/admin/command', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ command: query })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate query');
       }
-      
-      setGeneratedQuery(sql);
-      setIsProcessing(false);
+
+      const data = await response.json();
+      setGeneratedQuery(data.sql_query);
       
       toast({
         title: "Query Generated",
         description: "SQL query has been generated from your request",
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Error generating query:', error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to generate SQL query. Please try again.",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
-  const handleExecuteQuery = () => {
+  const handleExecuteQuery = async () => {
     if (!generatedQuery) return;
     
-    // Simulate execution
-    toast({
-      title: "Query Executed Successfully",
-      description: "The database has been updated",
-    });
-    
-    setGeneratedQuery('');
+    try {
+      const response = await fetch('/api/v1/admin/execute', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ sql_query: generatedQuery })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to execute query');
+      }
+
+      toast({
+        title: "Query Executed Successfully",
+        description: "The database has been updated",
+      });
+      
+      setGeneratedQuery('');
+    } catch (error) {
+      console.error('Error executing query:', error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to execute SQL query. Please try again.",
+      });
+    }
   };
 
   return (

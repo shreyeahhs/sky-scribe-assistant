@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type User = {
@@ -46,11 +45,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Mock validation
-      if (email === 'admin@example.com' && password === 'admin') {
+      if (email === 'admin@example.com' && password === 'admin123') {
         const adminUser: User = { id: '1', email, role: 'admin' };
         localStorage.setItem('user', JSON.stringify(adminUser));
         setUser(adminUser);
-      } else if (email === 'user@example.com' && password === 'user') {
+      } else if (email === 'user@example.com' && password === 'user123') {
         const regularUser: User = { id: '2', email, role: 'user' };
         localStorage.setItem('user', JSON.stringify(regularUser));
         setUser(regularUser);
